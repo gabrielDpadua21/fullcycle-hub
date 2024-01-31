@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goserver
+  labels:
+    app: goserver
+spec:
+  selector:
+    matchLabels:
+      app: goserver
+  replicas: 2
+  template:
+    metadata:
+      labels: 
+        app: "goserver"
+    spec:
+      containers:
+        - name: goserver
+          image: "gabrieldpadua21/server-go:v10.1"
+          envFrom:
+            - configMapRef:
+                name: goserver-env
+
+            - secretRef:
+                name: goserver-secret
+          
+          volumeMounts:
+            - mountPath: "/go/env"
+              name: config
+
+
+      volumes:
+        - name: config
+          configMap:
+            name: configmap-msg
+            items:
+            - key: names
+              path: "matrix.txt"
+
