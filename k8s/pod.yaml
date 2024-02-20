@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: golang-server
+  labels:
+    app: golang-server
+spec:
+  containers:
+  - name: golang-server
+    image: gabrieldpadua21/golang-server:latest
