@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"net/http"
-	"os"
 	"io/ioutil"
 	"log"
+	"net/http"
+	"os"
 	"time"
 )
 
@@ -19,9 +19,21 @@ func main() {
 }
 
 func Hello(w http.ResponseWriter, r *http.Request) {
-	name := func() string { if os.Getenv("NAME") == "" { return "Neo" } else { return os.Getenv("NAME") } }()
-	color := func() string { if os.Getenv("COLOR") == "" { return "white" } else { return os.Getenv("COLOR") } }()
-	fmt.Fprintf(w, "Hello, %s. The kubernets has you, follow the %s habbit", name, color)
+	name := func() string {
+		if os.Getenv("NAME") == "" {
+			return "Neo"
+		} else {
+			return os.Getenv("NAME")
+		}
+	}()
+	color := func() string {
+		if os.Getenv("COLOR") == "" {
+			return "white"
+		} else {
+			return os.Getenv("COLOR")
+		}
+	}()
+	fmt.Fprintf(w, "Hello, %s. The kubernets has you, follow the %s habbit - version 2", name, color)
 }
 
 func ConfigMap(w http.ResponseWriter, r *http.Request) {
